@@ -1,0 +1,12 @@
+{
+  "name": "REST-API-server-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Monika-Grzanek/REST-API-server-app.git",
+  "author": "Monika Grzanek <monski@o2.pl>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3",
+    "uuid": "^8.3.2"
+  }
+}
