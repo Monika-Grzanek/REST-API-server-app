@@ -12,17 +12,17 @@ router.route('/testimonials/:id').get((req, res) => {
 });
 
 router.route('/testimonials/random').get((req, res) => {
-  let item = db.testimonials[Math.floor(Math.random() * db.length )];
+  let item = db.testimonials[Math.floor(Math.random() * db.length) + 1];
   res.json(item);
 });
 
 router.route('/testimonials').post((req, res) => {
-  const newData = {
+  const newTestimonial = {
     id: uuidv4(),
     author: req.body.author,
     text: req.body.text,
   };
-  db.testimonials.push(newData);
+  db.testimonials.push(newTestimonial);
   return res.json({message: 'OK'});
 });
 

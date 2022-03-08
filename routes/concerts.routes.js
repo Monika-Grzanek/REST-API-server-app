@@ -12,7 +12,7 @@ router.route('/concerts/:id').get((req, res) => {
 });
 
 router.route('/concerts').post((req, res) => {
-  const newData = {
+  const newConcert = {
     id: uuidv4(),
     performer: req.body.performer,
     genre: req.body.genre,
@@ -20,15 +20,15 @@ router.route('/concerts').post((req, res) => {
     day: req.body.day,
     image: req.body.image,
   };
-  db.concerts.push(newData);
-  return res.json({message: 'ok'});
+  db.concerts.push(newConcert);
+  return res.json({message: 'OK'});
 });
 
 router.route('/concerts/:id').delete((req, res) => {
   const deletedConcerts = db.concerts.filter((item) => item.id == req.params.id);
   const indexOfConcerts = db.concerts.indexOf(deletedConcerts);
   db.concerts.splice(indexOfConcerts, 1);
-  return res.json({message: 'ok'});
+  return res.json({message: 'OK'});
 });
 
 router.route('/concerts/:id').put((req, res) => {
