@@ -7,13 +7,13 @@ router.route('/testimonials').get((req, res) => {
   res.json(db.testimonials);
 });
 
-router.route('/testimonials/:id').get((req, res) => {
-  res.json(db.testimonials.filter((item) => item.id == req.params.id));
+router.route('/testimonials/random').get((req, res) => {
+  let item = db.testimonials[Math.floor(Math.random() * db.testimonials.length)];
+  res.json(item);
 });
 
-router.route('/testimonials/random').get((req, res) => {
-  let item = db.testimonials[Math.floor(Math.random() * db.length) + 1];
-  res.json(item);
+router.route('/testimonials/:id').get((req, res) => {
+  res.json(db.testimonials.filter(item => item.id == req.params.id));
 });
 
 router.route('/testimonials').post((req, res) => {
@@ -27,21 +27,19 @@ router.route('/testimonials').post((req, res) => {
 });
 
 router.route('/testimonials/:id').put((req, res) => {
-  const editedTestimonials = db.testimonials.filter((item) => item.id == req.params.id);
-  const indexOfTestimonial = db.testimonials.indexOf(editedTestimonials);
-  const newTestimonials = {
-    ...editedTestimonials,
+  const index = db.testimonials.findIndex(item => item.id == req.params.id)
+  const editedTestimonial = {
+    ...db.testimonials[index],
     author: req.body.author,
     text: req.body.text,
   };
-  db.testimonials[indexOfTestimonial] = newTestimonials;
+  db.testimonials[index] = editedTestimonial;
   return res.json({message: 'OK'});
 });
 
 router.route('/testimonials/:id').delete((req, res) => {
-  const deletedTestimonials = db.testimonials.filter((item) => item.id == req.params.id);
-  const indexOfTestimonial = db.testimonials.indexOf(deletedTestimonials);
-  db.testimonials.splice(indexOfTestimonial, 1);
+  const indexToDelete = db.testimonials.findIndex(item => item.id == req.params.id);
+  db.testimonials.splice(indexToDelete, 1);
   return res.json({message: 'OK'});
 });
 

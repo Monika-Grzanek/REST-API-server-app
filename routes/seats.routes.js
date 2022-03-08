@@ -7,40 +7,43 @@ router.route('/seats').get((req, res) => {
   res.json(db.seats);
 });
 
+router.route('/seats/random').get((req, res) => {
+  let item = db.seats[Math.floor(Math.random() * db.seats.length)];
+  res.json(item);
+});
+
 router.route('/seats/:id').get((req, res) => {
-  res.json(db.seats.filter((item) => item.id == req.params.id));
+  res.json(db.seats.filter(item => item.id == req.params.id));
 });
 
 router.route('/seats').post((req, res) => {
-  const newData = {
+  const newSeat = {
     id: uuidv4(),
     day: req.body.day,
     seat: req.body.seat,
     client: req.body.client,
     email: req.body.email,
   };
-  db.seats.push(newData);
-  return res.json({message: 'OK'});
-});
-
-router.route('/seats/:id').delete((req, res) => {
-  const deletedSeats = db.seats.filter((item) => item.id == req.params.id);
-  const indexOfSeats = db.seats.indexOf(deletedSeats);
-  db.concerts.splice(indexOfSeats, 1);
+  db.seats.push(newSeat);
   return res.json({message: 'OK'});
 });
 
 router.route('/seats/:id').put((req, res) => {
-  const editedConcerts = db.concerts.filter((item) => item.id == req.params.id);
-  const indexOfConcerts = db.concerts.filter((item) => item.id == req.params.id);
-  const newConcert = {
-    ...editedConcerts,
+  const index = db.seats.findIndex(item => item.id == req.params.id);
+  const editedSeat = {
+    ...db.seats[index],
     day: req.body.day,
     seat: req.body.seat,
     client: req.body.client,
     email: req.body.email,
   };
-  db.concerts[indexOfConcerts] = newConcert;
+  db.seats[index] = editedSeat;
+  return res.json({message: 'OK'});
+});
+
+router.route('/seats/:id').delete((req, res) => {
+  const indexToDelete = db.seats.findIndex(item => item.id == req.params.id);
+  db.seats.splice(indexToDelete, 1);
   return res.json({message: 'OK'});
 });
 
