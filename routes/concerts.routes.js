@@ -14,7 +14,7 @@ router.route('/concerts/random').get((req, res) => {
 
 
 router.route('/concerts/:id').get((req, res) => {
-  res.json(db.concerts.filter(item => item.id == req.params.id));
+  res.json(db.concerts.find(item => item.id == req.params.id));
 });
 
 router.route('/concerts').post((req, res) => {

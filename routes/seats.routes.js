@@ -13,7 +13,7 @@ router.route('/seats/random').get((req, res) => {
 });
 
 router.route('/seats/:id').get((req, res) => {
-  res.json(db.seats.filter(item => item.id == req.params.id));
+  res.json(db.seats.find(item => item.id == req.params.id));
 });
 
 router.route('/seats').post((req, res) => {

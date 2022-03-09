@@ -13,7 +13,7 @@ router.route('/testimonials/random').get((req, res) => {
 });
 
 router.route('/testimonials/:id').get((req, res) => {
-  res.json(db.testimonials.filter(item => item.id == req.params.id));
+  res.json(db.testimonials.find(item => item.id == req.params.id));
 });
 
 router.route('/testimonials').post((req, res) => {
