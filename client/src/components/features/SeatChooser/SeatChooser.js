@@ -1,13 +1,19 @@
 import React from 'react';
 import { Button, Progress, Alert } from 'reactstrap';
+import { loadSeats } from '../../../redux/seatsRedux';
 
 import './SeatChooser.scss';
 
 class SeatChooser extends React.Component {
-  
+
   componentDidMount() {
     const { loadSeats } = this.props;
     loadSeats();
+    setInterval(loadSeats(), 120000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(loadSeats());
   }
 
   isTaken = (seatId) => {
