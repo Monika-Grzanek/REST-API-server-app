@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Progress, Alert } from 'reactstrap';
 import { loadSeats } from '../../../redux/seatsRedux';
-
+import io from 'socket.io-client';
 import './SeatChooser.scss';
+import { WS_URL } from '../../../config.js';
 
 class SeatChooser extends React.Component {
 
@@ -10,6 +11,7 @@ class SeatChooser extends React.Component {
     const { loadSeats } = this.props;
     loadSeats();
     setInterval(loadSeats(), 120000);
+    this.socket = io(WS_URL, { transports: ['websocket'] });
   }
 
   componentWillUnmount() {
