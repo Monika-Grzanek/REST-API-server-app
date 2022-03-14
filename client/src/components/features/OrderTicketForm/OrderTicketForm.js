@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Row, Col, Alert, Progress } from 'reactstrap';
 
@@ -62,7 +61,7 @@ class OrderTicketForm extends React.Component {
   }
 
   render() {
-    
+
     const { updateSeat, updateTextField, updateNumberField, submitForm } = this;
     const { requests } = this.props;
     const { order, isError } = this.state;
@@ -95,7 +94,6 @@ class OrderTicketForm extends React.Component {
             <FormGroup check>
               <Label check>
                 <Input required type="checkbox" /> I agree with <a href="#">Terms and conditions</a> and <a href="#">Privacy Policy</a>.
-              
               </Label>
             </FormGroup>
             <Button color="primary" className="mt-3">Submit</Button>
