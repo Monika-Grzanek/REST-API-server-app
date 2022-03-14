@@ -17,20 +17,19 @@ router.route('/seats/:id').get((req, res) => {
 });
 
 router.route('/seats').post((req, res) => {
-  const { day, seat, client, email } = req.body;
- 
-  if (db.seats.some(item => (item.day == day && item.seat == seat))) {
-    res.status(400).send(`The slot is already taken...`);
+  const newData = {
+    id: uuidv4(),
+    day: req.body.day,
+    seat: req.body.seat,
+    client: req.body.client,
+    email: req.body.email,
+  };
+  if (db.seats.some(item => (item.day == req.body.day && item.seat === req.body.seat))) {
+    res.status(400).json({message:`The slot is already taken...`});
   }
   else {
-    db.seats.push({
-      id: uuidv4(),
-      day: day,
-      seat: seat,
-      client: client,
-      email: email,
-    });
-    res.json({ message: 'OK' });
+    db.seats.push(newData);
+    return res.json({ message: 'Add resevation' });
   }
 });
 
