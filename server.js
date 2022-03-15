@@ -14,14 +14,13 @@ app.use(cors());
 app.listen(process.env.PORT || 8000, () => {
     console.log('Server is running on port: 8000');
 });
+app.use('/api', testimonialsRoutes);
+app.use('/api', concertsRoutes);
+app.use('/api', seatsRoutes);
 
-app.use('/', testimonialsRoutes);
-app.use('/', concertsRoutes);
-app.use('/', seatsRoutes);
-
+app.use(express.static(path.join(__dirname, '/client/build')));
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build/index.html'));
-    app.use(express.static(path.join(__dirname, '/client/build')));
 });
 
 app.use(express.static(path.join(__dirname, '/client/build')));
