@@ -1,19 +1,19 @@
 import React from 'react';
 import { Button, Progress, Alert } from 'reactstrap';
-import { loadSeats } from '../../../redux/seatsRedux';
+import io from 'socket.io-client';
+import { WS_URL } from '../../../config.js';
 
 import './SeatChooser.scss';
 
 class SeatChooser extends React.Component {
 
   componentDidMount() {
-    const { loadSeats } = this.props;
+    const { loadSeats, loadSeatsData  } = this.props;
     loadSeats();
-    setInterval(loadSeats(), 120000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(loadSeats());
+    this.socket = io(WS_URL, { transports: ['websocket'] });
+    this.socket.on('seatsUpdated', (seats) => {
+      loadSeatsData(seats);
+    });
   }
 
   isTaken = (seatId) => {

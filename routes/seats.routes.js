@@ -29,6 +29,7 @@ router.route('/seats').post((req, res) => {
   }
   else {
     db.seats.push(newData);
+    req.io.emit('seatsUpdated', db.seats);
     return res.json({ message: 'Add resevation' });
   }
 });
