@@ -49,7 +49,7 @@ router.route('/seats/:id').put((req, res) => {
 router.route('/seats/:id').delete((req, res) => {
   const indexToDelete = db.seats.findIndex(item => item.id == req.params.id);
   db.seats.splice(indexToDelete, 1);
-  return res.json({message: 'OK'});
+  return res.json({message: 'Done'});
 });
 
 module.exports = router;
