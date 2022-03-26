@@ -8,6 +8,14 @@ router.get('/concerts/random', ConcertController.getRandom);
 
 router.get('/concerts/:id', ConcertController.getById);
 
+router.get('/concerts/performer/:performer', ConcertController.getByPerformer);
+
+router.get('/concerts/genre/:genre', ConcertController.getByGenre);
+
+router.get('/concerts/price/:price_min/:price_max', ConcertController.getByPrice);
+
+router.get('/concerts/price/day/:day', ConcertController.getByDay);
+
 router.post('/concerts', ConcertController.postItem);
 
 router.put('/concerts/:id', ConcertController.putItem);
