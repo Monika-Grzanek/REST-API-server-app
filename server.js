@@ -13,7 +13,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect('mongodb+srv://dataUser:0rjxvLS1Dby1urpS@cluster0.l1ute.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
+/*mongoose.connect('mongodb+srv://dataUser:0rjxvLS1Dby1urpS@cluster0.l1ute.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
+const db = mongoose.connection;*/
+
+const NODE_ENV = process.env.NODE_ENV;
+let dbUri = '';
+
+if(NODE_ENV === 'production') dbUri = 'mongodb+srv://dataUser:0rjxvLS1Dby1urpS@cluster0.l1ute.mongodb.net/NewWaveDB?retryWrites=true&w=majority';
+else if(NODE_ENV === 'test') dbUri = 'mongodb://localhost:27017/NewWaveDBtest';
+else dbUri = 'mongodb://localhost:27017/NewWaveDB';
+
+mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -57,4 +67,6 @@ io.on('connection', (socket) => {
         console.log('Socket ' + socket.id + ' left');
     });
 });
+
+module.exports = server;
 
