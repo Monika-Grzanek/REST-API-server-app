@@ -12,13 +12,13 @@
     "express": "^4.17.3",
     "express-router": "^0.0.1",
     "helmet": "3.21.1",
-    "mocha": "6.2.1",
+    "mocha": "11.0.1",
     "mongo-sanitize": "1.0.1",
     "mongoose": "5.7.1",
     "nodemon": "^2.0.15",
     "onchange": "6.1.0",
-    "snyk": "1.235.0",
-    "socket.io": "^4.4.1",
+    "snyk": "1.1297.3",
+    "socket.io": "^4.8.0",
     "uuid": "^8.3.2"
   },
   "scripts": {
